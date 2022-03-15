@@ -24,8 +24,8 @@ def main(orders, verbose=True ,log="warning"):
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description='Moving robot application')
-    parser.add_argument('--orders', nargs="*", type=str, help='List of orders to be executed by the robot',
-        default = ['PLACE 0,0,NORTH', 'MOVE', 'REPORT'])
+    parser.add_argument('--orders', nargs="*", type=str, help='List of orders to be executed by the robot.'+
+    'Implemented orders are "PLACE X,Y,DIR", "MOVE", "RIGHT", "LEFT" and "REPORT".', default = ['PLACE 0,0,NORTH', 'MOVE', 'REPORT'])
     parser.add_argument('--verbose', type=bool, help="Shows robot's report meassage if set to true",
         default = True)
     parser.add_argument('--log', type=str, help='Set logging level of the printed information. Can be set to"'+
