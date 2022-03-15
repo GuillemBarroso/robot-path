@@ -12,13 +12,16 @@ class Robot():
         self.orientations = None
         self.xLim = xLim
         self.yLim = yLim
-        self.orientList = ['NORTH', 'WEST', 'SOUTH', 'EAST']
+        self.orientList = ['NORTH', 'EAST', 'SOUTH', 'WEST']
 
     def place(self, x0=0, y0=0, face0="NORTH"):
-        self.x = x0
-        self.y = y0
-        self.face = face0
-        self.getFirstOrientation()
+        if self.xLim[0] <= x0 <= self.xLim[1] and self.yLim[0] <= y0 <= self.yLim[1]:
+            self.x = x0
+            self.y = y0
+            self.face = face0
+            self.getFirstOrientation()
+        else:
+            logging.warning("Ilegal placement ordered. Igoring order.")
 
     def move(self):
         dx, dy = self.getMovingDir(self.face)
@@ -48,10 +51,10 @@ class Robot():
             self.dx = 0
             self.dy = -1
         elif face == "EAST":
-            self.dx = -1
+            self.dx = 1
             self.dy = 0
         elif face == "WEST":
-            self.dx = 1
+            self.dx = -1
             self.dy = 0
 
         return self.dx, self.dy
