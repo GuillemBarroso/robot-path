@@ -1,31 +1,39 @@
 import numpy as np
+import logging
 
 
 class Robot():
-    def __init__(self):
+    def __init__(self, xLim=(0,5), yLim=(0,5)):
         self.x = None
         self.y = None
         self.face = None
         self.dx = None
         self.dy = None
         self.orientations = None
+        self.xLim = xLim
+        self.yLim = yLim
         self.orientList = ['NORTH', 'WEST', 'SOUTH', 'EAST']
 
-    def Place(self, x0=0, y0=0, face0="NORTH"):
+    def place(self, x0=0, y0=0, face0="NORTH"):
         self.x = x0
         self.y = y0
         self.face = face0
         self.getFirstOrientation()
 
-    def Move(self):
+    def move(self):
         dx, dy = self.getMovingDir(self.face)
-        self.x += dx
-        self.y += dy
+        newX = self.x + dx
+        newY = self.y + dy
+        if self.xLim[0] <= newX <= self.xLim[1] and self.yLim[0] <= newY <= self.yLim[1]:
+            self.x = newX
+            self.y = newY
+        else:
+            logging.warning("Ilegal move ordered. Igoring order.")            
 
-    def Report(self):
+    def report(self):
         return self.x, self.y, self.face
 
-    def Rotate(self, rotation):
+    def rotate(self, rotation):
         if rotation == 'LEFT':
             self.orientations = np.roll(self.orientations, 1)
         elif rotation == 'RIGHT':
@@ -49,14 +57,4 @@ class Robot():
         return self.dx, self.dy
 
     def getFirstOrientation(self):
-        self.orientations = np.roll(self.orientList, self.orientList.index(self.face))
-
-
-class Tabletop():
-    def __init__(self):
-        self.lenX = None
-        self.lenY = None
-
-    def setTableDim(self, lenX, lenY):
-        self.lenX = lenX
-        self.lenY = lenY
+        self.orientations = np.roll(self.orientList, -self.orientList.index(self.face))
