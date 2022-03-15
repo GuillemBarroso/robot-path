@@ -52,7 +52,7 @@ An example of the command to execute the application with some orders is
 pipenv run python main.py --orders "PLACE 0,0,NORTH" "MOVE" "MOVE" "RIGHT" "MOVE" "REPORT"
 ```
 
-## Testing
+## Testing
 
 The file `test_main.py` contains unit testing for two of the main functions of the application. Moreover, a collection of paths with known end point are executed in order to test the system.
 
