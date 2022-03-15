@@ -1,7 +1,8 @@
 from robot import Robot
-from main import main
+from main import main   
+import pytest
 
-def getFirstOrientation_test():
+def test_getFirstOrientation():
     r = Robot()
     faces = ["NORTH", "WEST", "EAST", "SOUTH"]
     for face in faces:
@@ -11,7 +12,7 @@ def getFirstOrientation_test():
 
     print("Unit testing for getFirstOrientation() successful!")
 
-def rotate_test():
+def test_rotate():
     r = Robot()
     tests = [["NORTH", "LEFT", "WEST"],
              ["WEST", "LEFT", "SOUTH"],
@@ -30,13 +31,7 @@ def rotate_test():
     print("Unit testing for rotate() successful!")
     
 
-if __name__ == '__main__':
-
-    # Unit testing
-    getFirstOrientation_test()
-    rotate_test()
-
-    # System testing 
+def test_system():
     # Note that all tests must finish with a REPORT, so the final position is recovered for assessment
     orders = [
         ['PLACE 0,0,NORTH', 'MOVE', 'REPORT'],
@@ -76,3 +71,13 @@ if __name__ == '__main__':
         assert(targets[i][2] == out.report[2]), "Test {} failed. Direction incorrect: got {}, want {}".format(i, out.report[2], targets[i][2])
 
     print("System testing successful!")
+
+if __name__ == '__main__':
+
+    # Unit testing
+    test_getFirstOrientation()
+    test_rotate()
+
+    # System testing 
+    test_system()
+    

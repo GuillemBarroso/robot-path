@@ -2,7 +2,7 @@
 
 Application that moves a robot on a tabletop
 
-## Decription
+## Description
 
 Two main classes are defined in order to implement this application.
 
@@ -15,13 +15,7 @@ As can be seen in `main.py`, Robot is first initialised defining the limits of t
 
 ## Install dependencies
 
-Install pipenv and initiate environment with
-
-```
-pipenv shell
-```
-
-Once activated, install dependencies
+Install pipenv and activate environment to install dependencies
 
 ```
 pipenv install -r requirements.txt
@@ -60,10 +54,10 @@ pipenv run python main.py --orders "PLACE 0,0,NORTH" "MOVE" "MOVE" "RIGHT" "MOVE
 
 ## Testing
 
-The file `test.py` contains unit testing for two of the main functions of the application. Moreover, a collection of paths with known end point are executed in order to test the system.
+The file `test_main.py` contains unit testing for two of the main functions of the application. Moreover, a collection of paths with known end point are executed in order to test the system.
 
 To run all tests use
 
 ```
-pipenv run python test.py
+pipenv run pytest
 ```
